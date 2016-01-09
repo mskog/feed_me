@@ -53,10 +53,16 @@ describe Feed do
   describe "#fetch_entries" do
     subject{create :feed}
 
-    When{subject.fetch_entries}
+    context "with a given feedjira feed" do
+      Given(:feedjira_feed){Feedjira::Feed.parse(File.new('spec/fixtures/feeds/gamespot_reviews.xml').read)}
+      When{subject.fetch_entries(feedjira_feed)}
+      Then{expect(subject.entries.size).to eq 2}
+    end
 
     context "with an ok response" do
       Given{stub_request(:get, subject.url).to_return(File.new('spec/fixtures/feeds/gamespot_reviews.txt'))}
+
+      When{subject.fetch_entries}
 
       context "with a feed without current entries" do
         Given(:first_entry){subject.entries.first}

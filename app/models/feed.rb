@@ -11,9 +11,8 @@ class Feed < ActiveRecord::Base
     end
   end
 
-  def fetch_entries
+  def fetch_entries(feedjira_feed = Feedjira::Feed.fetch_and_parse(url))
     max_published_at = entries.maximum(:published_at)
-    feedjira_feed = Feedjira::Feed.fetch_and_parse(url)
     feedjira_feed.entries.each do |feedjira_entry|
       next unless !max_published_at.present? || feedjira_entry.published > max_published_at
       entries.create_from_feedjira_entry(self, feedjira_entry)
