@@ -6,13 +6,13 @@ describe FeedEntry do
   it{is_expected.to belong_to(:feed)}
 
   it{is_expected.to validate_presence_of :title}
-  it{is_expected.to validate_presence_of :link}
+  it{is_expected.to validate_presence_of :url}
 
-  it{is_expected.to_not allow_values("sdf", "1234").for(:link)}
-  it{is_expected.to allow_values("https://www.test.com", "http://test.com").for(:link)}
+  it{is_expected.to_not allow_values("sdf", "1234").for(:url)}
+  it{is_expected.to allow_values("https://www.test.com", "http://test.com").for(:url)}
 
   describe "it has a valid factory" do
     When(:feed_entry) {build(:feed_entry)}
-    Then {expect(feed_entry).to be_valid}
+    Then{expect(feed_entry).to be_valid}
   end
 end
