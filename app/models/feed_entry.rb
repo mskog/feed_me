@@ -1,5 +1,5 @@
-class Feed < ActiveRecord::Base
-  has_many :entries, class_name: "FeedEntry"
+class FeedEntry < ActiveRecord::Base
+  belongs_to :feed
 
   validates_presence_of :title
   validates :link, presence: true, url: true

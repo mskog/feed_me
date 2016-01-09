@@ -1,10 +1,9 @@
 require 'spec_helper'
 
-describe Feed do
+describe FeedEntry do
+  subject{described_class.new(attributes_for(:feed_entry))}
 
-  subject{described_class.new(attributes_for(:feed))}
-
-  it{is_expected.to have_many(:entries).class_name("FeedEntry")}
+  it{is_expected.to belong_to(:feed)}
 
   it{is_expected.to validate_presence_of :title}
   it{is_expected.to validate_presence_of :link}
@@ -13,7 +12,7 @@ describe Feed do
   it{is_expected.to allow_values("https://www.test.com", "http://test.com").for(:link)}
 
   describe "it has a valid factory" do
-    When(:feed) {build(:feed)}
-    Then {expect(feed).to be_valid}
+    When(:feed_entry) {build(:feed_entry)}
+    Then {expect(feed_entry).to be_valid}
   end
 end
