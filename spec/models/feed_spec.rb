@@ -16,4 +16,27 @@ describe Feed do
     When(:feed) {build(:feed)}
     Then {expect(feed).to be_valid}
   end
+
+  describe ".create_from_url" do
+    When(:feed){described_class.create_from_url(url)}
+
+    context "with a url that works" do
+      Given do
+        stub_request(:get, url).to_return(File.new('spec/fixtures/feeds/gamespot_reviews.txt'))
+      end
+
+      Given(:url){"http://www.gamespot.com/feeds/reviews/"}
+      Then{expect(feed.title).to eq "GameSpot Reviews"}
+      And{expect(feed.description).to start_with 'The latest Reviews'}
+      And{expect(feed.link).to eq url}
+    end
+
+    context "with a url that gives errors" do
+      pending
+    end
+
+    context "with a url that is not a feed" do
+      pending
+    end
+  end
 end
