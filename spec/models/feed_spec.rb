@@ -62,18 +62,31 @@ describe Feed do
         Given(:first_entry){subject.entries.first}
         Given(:last_entry){subject.entries.last}
 
-        Then{expect(subject.entries.size).to eq 15}
+        Then{expect(subject.entries.size).to eq 2}
         And{expect(first_entry.title).to eq "Beyond: Two Souls Review"}
         And{expect(first_entry.url).to eq "http://www.gamespot.com/reviews/beyond-two-souls-review/1900-6416326/"}
         And{expect(first_entry.summary).to start_with "<p style"}
         And{expect(first_entry.author).to eq 'Justin Clark'}
         And{expect(first_entry.published_at).to eq DateTime.parse("2015-12-11 18:01:00.000000000 +0000")}
 
-        And{expect(last_entry.title).to eq "Star Wars Battlefront Review"}
-        And{expect(last_entry.url).to eq "http://www.gamespot.com/reviews/star-wars-battlefront-review/1900-6416311/"}
+        And{expect(last_entry.title).to eq "Yakuza 5 Review"}
+        And{expect(last_entry.url).to eq "http://www.gamespot.com/reviews/yakuza-5-review/1900-6416325/"}
         And{expect(last_entry.summary).to start_with "<p style"}
-        And{expect(last_entry.author).to eq 'Mike Mahardy'}
-        And{expect(last_entry.published_at).to eq DateTime.parse("2015-11-17 05:00:00.000000000 +0000")}
+        And{expect(last_entry.author).to eq 'Miguel Concepcion'}
+        And{expect(last_entry.published_at).to eq DateTime.parse("Wed, 09 Dec 2015 18:30:00 UTC +00:00")}
+      end
+
+      context "with some of the entries already existing" do
+        When do
+          subject.entries.first.destroy
+          subject.fetch_entries
+        end
+        Then{expect(subject.entries.size).to eq 2}
+      end
+
+      context "with a with all entries already existing" do
+        When{subject.fetch_entries}
+        Then{expect(subject.entries.size).to eq 2}
       end
     end
   end
