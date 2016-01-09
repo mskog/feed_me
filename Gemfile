@@ -83,7 +83,7 @@ group :development, :test do
   gem 'mascherano'
 
   # Spring
-  gem 'spring', '1.6.1'
+  gem 'spring', '1.6.2'
   gem "spring-commands-rspec"
 
   # Pry
