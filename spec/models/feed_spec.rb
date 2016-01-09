@@ -31,6 +31,16 @@ describe Feed do
       And{expect(feed.link).to eq url}
     end
 
+    context "with a feed that already exists" do
+      Given!(:existing_feed){create :feed}
+      Given(:url){existing_feed.link}
+      # Then{expect(Feed.count).to eq 1}
+      Then{expect(feed.id).to eq existing_feed.id}
+      And{expect(feed.title).to eq existing_feed.title}
+      And{expect(feed.description).to eq existing_feed.description}
+      And{expect(feed.link).to eq url}
+    end
+
     context "with a url that gives errors" do
       pending
     end
