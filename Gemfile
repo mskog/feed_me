@@ -60,7 +60,9 @@ gem 'multi_fetch_fragments', '~> 0.0.17'
 
 # Pagination
 gem 'kaminari', '~> 0.16'
-gem 'bootstrap-kaminari-views', '~> 0.0.5'
+
+# Validations
+gem 'validate_url', '~> 1.0', '>= 1.0.2'
 
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'

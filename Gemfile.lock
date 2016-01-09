@@ -59,9 +59,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-kaminari-views (0.0.5)
-      kaminari (>= 0.13)
-      rails (>= 3.1)
     bootstrap-sass (3.3.6)
       autoprefixer-rails (>= 5.2.1)
       sass (>= 3.3.4)
@@ -368,6 +365,9 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    validate_url (1.0.2)
+      activemodel (>= 3.0.0)
+      addressable
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -385,7 +385,6 @@ DEPENDENCIES
   bcrypt (= 3.1.10)
   better_errors (~> 2.1.1)
   binding_of_caller
-  bootstrap-kaminari-views (~> 0.0.5)
   bootstrap-sass (>= 3.3.6)
   byebug (~> 8.2)
   capistrano (~> 3.4.0)
@@ -431,5 +430,6 @@ DEPENDENCIES
   therubyracer (~> 0.12.1)
   turbolinks (~> 2.5.3)
   uglifier (>= 2.7.2)
+  validate_url (~> 1.0, >= 1.0.2)
   virtus (~> 1.0.5)
   webmock (~> 1.22)
