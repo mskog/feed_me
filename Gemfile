@@ -70,7 +70,7 @@ group :development, :test do
   gem 'guard-rails', '~> 0.7'
   gem 'guard-rspec', '~> 4.6'
   gem 'byebug',  '~> 8.2'
-  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'factory_girl_rails', '~> 4.6.0'
   gem 'faker', git: 'https://github.com/joenas/faker'
   gem 'rspec-rails', '~> 3.4'
   gem 'rspec-given', '~> 3.8'
@@ -85,7 +85,7 @@ group :development, :test do
   gem 'mascherano'
 
   # Spring
-  gem 'spring', '1.6.2'
+  gem 'spring', '1.6.4'
   gem "spring-commands-rspec"
 
   # Pry
