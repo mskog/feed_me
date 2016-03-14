@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 ruby '2.2.0'
 
 # Standard Rails gems
-gem 'rails', '4.2.5.1'
-gem 'bcrypt', '3.1.10'
+gem 'rails', '4.2.6'
+gem 'bcrypt', '3.1.11'
 
 # PostgreSQL
 gem 'pg', "~> 0.18.4"
@@ -23,7 +23,7 @@ gem 'clockwork', '~> 1.2.0'
 
 gem 'naught', '~> 1.1'
 
-gem 'rollbar', '~> 2.7'
+gem 'rollbar', '~> 2.8'
 
 gem 'faraday', '~> 0.9'
 gem 'faraday-cookie_jar', '~> 0.0.6'
@@ -95,6 +95,6 @@ group :development, :test do
 end
 
 group :test do
-  gem 'webmock', '~> 1.22'
+  gem 'webmock', '~> 1.24'
   gem 'simplecov', :require => false
 end
