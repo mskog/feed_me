@@ -1,5 +1,6 @@
 class Feed < ActiveRecord::Base
   has_many :entries, class_name: "FeedEntry", dependent: :destroy
+  has_many :users, through: :user_feeds
 
   validates_presence_of :title
   validates :url, presence: true, url: true

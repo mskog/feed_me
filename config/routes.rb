@@ -4,5 +4,12 @@ Sidekiq::Web.use Rack::Auth::Basic do |username, password|
 end
 
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      resources :feeds, only: [:index], controller: :user_feeds
+    end
+  end
+
+  devise_for :users
   mount Sidekiq::Web => '/sidekiq'
 end

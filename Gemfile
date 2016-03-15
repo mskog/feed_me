@@ -64,6 +64,13 @@ gem 'kaminari', '~> 0.16'
 # Validations
 gem 'validate_url', '~> 1.0', '>= 1.0.2'
 
+# Authentication
+gem 'devise', '~> 3.5'
+gem 'simple_token_authentication', '~> 1.12'
+
+# Serializers
+gem 'active_model_serializers', '~> 0.9.4'
+
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', platforms: [:mri_20, :mri_21, :mri_22]
