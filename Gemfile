@@ -90,6 +90,7 @@ group :development, :test do
   gem 'capistrano-rbenv'
   gem 'capistrano-faster-assets'
   gem 'mascherano'
+  gem 'capistrano-db-tasks', git: "https://github.com/sgruhier/capistrano-db-tasks", require: false
 
   # Spring
   gem 'spring', '1.6.4'
