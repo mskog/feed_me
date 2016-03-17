@@ -26,3 +26,5 @@ module FeedMe
     config.active_job.queue_adapter = :sidekiq
   end
 end
+
+require 'trailblazer/rails/railtie'

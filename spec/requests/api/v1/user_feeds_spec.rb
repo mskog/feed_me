@@ -27,13 +27,15 @@ describe "API:V1:UserFeeds", type: :request do
       end
 
       Given(:url){'http://example.com/something.rss'}
-      Given(:params){{user_feed: {url: url}}}
+      Given(:params){{feed: {url: url}}}
 
       Given(:parsed_response){JSON.parse response.body}
       Given(:expected_feed){parsed_response['user_feed']}
+      Given(:created_feed){UserFeed.last}
 
       Then{expect(response.status).to eq 200}
       And{expect(expected_feed['title']).to eq 'GameSpot Reviews'}
+      And{expect(created_feed.user).to eq user}
     end
 
     context "without valid parameters" do

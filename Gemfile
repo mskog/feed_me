@@ -71,6 +71,8 @@ gem 'simple_token_authentication', '~> 1.12'
 # Serializers
 gem 'active_model_serializers', '~> 0.9.4'
 
+gem 'trailblazer-rails', '~> 0.2.4'
+
 group :development, :test do
   gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', platforms: [:mri_20, :mri_21, :mri_22]
