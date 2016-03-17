@@ -7,4 +7,9 @@ class Api::V1::UserFeedsController < Api::ApiController
     @user_feed = UserFeed.create_from_url(current_user, params[:user_feed][:url])
     render json: @user_feed
   end
+
+  def destroy
+    UserFeed.find(params[:id]).destroy
+    head :ok
+  end
 end

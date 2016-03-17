@@ -40,4 +40,13 @@ describe "API:V1:UserFeeds", type: :request do
       Then{expect(response.status).to eq 500}
     end
   end
+
+  describe "DELETE destroy" do
+    Given(:user_feed){create :user_feed, user: user}
+
+    When{delete api_v1_feed_path(user_feed.id, authenticated_params)}
+
+    Then{expect(response.status).to eq 200}
+    And{expect(UserFeed.count).to eq 0}
+  end
 end
