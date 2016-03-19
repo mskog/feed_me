@@ -35,10 +35,6 @@ describe "API:V1:UserFeeds", type: :request do
       Then{expect(response.status).to eq 200}
       And{expect(expected_feed['title']).to eq 'GameSpot Reviews'}
     end
-
-    context "without valid parameters" do
-      Then{expect(response.status).to eq 500}
-    end
   end
 
   describe "DELETE destroy" do

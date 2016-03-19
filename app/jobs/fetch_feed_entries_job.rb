@@ -1,5 +1,5 @@
 class FetchFeedEntriesJob < ActiveJob::Base
-  queue_as :default
+  queue_as :feeds
 
   def perform(feed)
     feed.fetch_entries

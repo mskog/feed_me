@@ -28,20 +28,8 @@ gem 'rollbar', '~> 2.8'
 gem 'faraday', '~> 0.9'
 gem 'faraday-cookie_jar', '~> 0.0.6'
 
-gem 'sass-rails', '~> 5.0.4'
-gem 'jquery-rails', '~> 4.1'
-
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 2.7.2'
-
-# Haml
-gem 'haml-rails', '~> 0.9.0'
-
 # Decorating
 gem 'draper', '~> 2.1.0'
-
-gem 'bootstrap-sass', '>= 3.3.6'
-gem 'font-awesome-rails', '~> 4.5.0'
 
 gem 'therubyracer', '~> 0.12.1', platforms: :ruby
 gem 'turbolinks', '~> 2.5.3'
@@ -72,7 +60,6 @@ gem 'simple_token_authentication', '~> 1.12'
 gem 'active_model_serializers', '~> 0.9.4'
 
 group :development, :test do
-  gem 'better_errors', '~> 2.1.1'
   gem 'binding_of_caller', platforms: [:mri_20, :mri_21, :mri_22]
   gem 'guard-rails', '~> 0.7'
   gem 'guard-rspec', '~> 4.6'
