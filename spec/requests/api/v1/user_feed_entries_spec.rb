@@ -16,5 +16,6 @@ describe "API:V1:UserFeedEntries", type: :request do
   And{expect(first_entry['summary']).to eq feed_entries.first.summary}
   And{expect(first_entry['content']).to eq feed_entries.first.content}
   And{expect(first_entry['author']).to eq feed_entries.first.author}
+  And{expect(first_entry['image']).to eq feed_entries.first.image}
   And{expect(first_entry['published_at']).to eq feed_entries.first.published_at}
 end
