@@ -59,6 +59,9 @@ gem 'simple_token_authentication', '~> 1.12'
 # Serializers
 gem 'active_model_serializers', '~> 0.9.4'
 
+# HTML parsing
+gem 'nokogiri', '~> 1.6'
+
 group :development, :test do
   gem 'binding_of_caller', platforms: [:mri_20, :mri_21, :mri_22]
   gem 'guard-rails', '~> 0.7'

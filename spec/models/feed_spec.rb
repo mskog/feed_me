@@ -73,12 +73,14 @@ describe Feed do
         And{expect(first_entry.url).to eq "http://www.gamespot.com/reviews/beyond-two-souls-review/1900-6416326/"}
         And{expect(first_entry.summary).to start_with "<p style"}
         And{expect(first_entry.author).to eq 'Justin Clark'}
+        And{expect(first_entry.image).to eq 'http://static1.gamespot.com/uploads/scale_super/1406/14063904/2977881-beyondtwosouls2.jpg'}
         And{expect(first_entry.published_at).to eq DateTime.parse("2015-12-11 18:01:00.000000000 +0000")}
 
         And{expect(last_entry.title).to eq "Yakuza 5 Review"}
         And{expect(last_entry.url).to eq "http://www.gamespot.com/reviews/yakuza-5-review/1900-6416325/"}
-        And{expect(last_entry.summary).to start_with "<p style"}
+        And{expect(last_entry.summary).to start_with "This one"}
         And{expect(last_entry.author).to eq 'Miguel Concepcion'}
+        And{expect(last_entry.image).to be_nil}
         And{expect(last_entry.published_at).to eq DateTime.parse("Wed, 09 Dec 2015 18:30:00 UTC +00:00")}
       end
 

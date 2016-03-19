@@ -390,6 +390,7 @@ DEPENDENCIES
   mascherano
   multi_fetch_fragments (~> 0.0.17)
   naught (~> 1.1)
+  nokogiri (~> 1.6)
   pg (~> 0.18.4)
   pry-rails (~> 0.3.2)
   quiet_assets (~> 1.1.0)
