@@ -24,5 +24,12 @@ module FeedMe
     config.active_record.raise_in_transactional_callbacks = true
 
     config.active_job.queue_adapter = :sidekiq
+
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :post, :options, :head, :delete, :put, :patch]
+      end
+    end
   end
 end
