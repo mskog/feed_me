@@ -4,5 +4,4 @@ class FeedEntryDecorator < Draper::Decorator
   def summary_stripped
     h.strip_tags object.summary
   end
-
 end
