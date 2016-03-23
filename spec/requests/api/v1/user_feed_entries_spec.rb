@@ -15,16 +15,18 @@ describe "API:V1:UserFeedEntries", type: :request do
 
     Then{expect(response.status).to eq 200}
     And{expect(parsed_response['user_feed_entries'].size).to eq 2}
-    And{expect(first_entry['title']).to eq feed_entry_1.title}
-    And{expect(first_entry['url']).to eq feed_entry_1.url}
-    And{expect(first_entry['summary']).to eq feed_entry_1.summary.truncate(255)}
-    And{expect(first_entry['content']).to eq feed_entry_1.content}
-    And{expect(first_entry['author']).to eq feed_entry_1.author}
-    And{expect(first_entry['image']).to eq feed_entry_1.image}
-    And{expect(first_entry['published_at']).to eq feed_entry_1.published_at}
-    And{expect(first_entry['published_at']).to eq feed_entry_1.published_at}
 
-    And{expect(second_entry['summary']).to eq 'foobar'}
+    And{expect(first_entry['summary']).to eq 'foobar'}
+
+    And{expect(second_entry['title']).to eq feed_entry_1.title}
+    And{expect(second_entry['url']).to eq feed_entry_1.url}
+    And{expect(second_entry['summary']).to eq feed_entry_1.summary.truncate(255)}
+    And{expect(second_entry['content']).to eq feed_entry_1.content}
+    And{expect(second_entry['author']).to eq feed_entry_1.author}
+    And{expect(second_entry['image']).to eq feed_entry_1.image}
+    And{expect(second_entry['published_at']).to eq feed_entry_1.published_at}
+    And{expect(second_entry['published_at']).to eq feed_entry_1.published_at}
+
   end
 
   context "paginated" do
