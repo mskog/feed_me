@@ -10,11 +10,11 @@ describe "API:V1:UserFeedEntries", type: :request do
     Given!(:feed_entry_2){create :feed_entry, feed: user_feed.feed, summary: "<a href='example.com'>foobar</a>"}
 
     When{get api_v1_entries_path(user_feed.id, user_email: user.email, user_token: user.authentication_token)}
-    Given(:first_entry){parsed_response['user_feed_entries'].first}
-    Given(:second_entry){parsed_response['user_feed_entries'].second}
+    Given(:first_entry){parsed_response['feed_entries'].first}
+    Given(:second_entry){parsed_response['feed_entries'].second}
 
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['user_feed_entries'].size).to eq 2}
+    And{expect(parsed_response['feed_entries'].size).to eq 2}
 
     And{expect(first_entry['summary']).to eq 'foobar'}
 
@@ -34,7 +34,7 @@ describe "API:V1:UserFeedEntries", type: :request do
 
     When{get api_v1_entries_path(user_feed.id, user_email: user.email, user_token: user.authentication_token)}
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['user_feed_entries'].size).to eq 20}
+    And{expect(parsed_response['feed_entries'].size).to eq 20}
     And{expect(parsed_response['meta']['current_page']).to eq 1}
     And{expect(parsed_response['meta']['next_page']).to eq 2}
     And{expect(parsed_response['meta']['prev_page']).to be_nil}

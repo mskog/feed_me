@@ -57,7 +57,7 @@ gem 'devise', '~> 3.5'
 gem 'simple_token_authentication', '~> 1.12'
 
 # Serializers
-gem 'active_model_serializers', '~> 0.9.4'
+gem 'active_model_serializers', '~> 0.10.0.rc3'
 
 # HTML parsing
 gem 'nokogiri', '~> 1.6'
