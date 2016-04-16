@@ -19,11 +19,11 @@ gem 'virtus', '~> 1.0.5'
 # Feeds
 gem 'feedjira', '~> 2.0.0'
 
-gem 'clockwork', '~> 1.2.0'
+gem 'clockwork', '~> 2'
 
 gem 'naught', '~> 1.1'
 
-gem 'rollbar', '~> 2.8'
+gem 'rollbar', '~> 2.9'
 
 gem 'faraday', '~> 0.9'
 gem 'faraday-cookie_jar', '~> 0.0.6'
@@ -79,7 +79,7 @@ group :development, :test do
   gem 'database_cleaner', '~> 1.5'
   gem 'quiet_assets', '~> 1.1.0'
 
-  gem 'capistrano', '~> 3.4.0'
+  gem 'capistrano', '~> 3.4.1'
   gem "capistrano-rails"
   gem 'capistrano-rbenv'
   gem 'capistrano-faster-assets'
@@ -87,7 +87,7 @@ group :development, :test do
   gem 'capistrano-db-tasks', git: "https://github.com/sgruhier/capistrano-db-tasks", require: false
 
   # Spring
-  gem 'spring', '1.6.4'
+  gem 'spring', '1.7.1'
   gem "spring-commands-rspec"
 
   # Pry
