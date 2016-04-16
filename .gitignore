@@ -101,3 +101,5 @@ public/sitemap*
 .env.local
 .env.test
 uploads
+
+docker-compose.yml
