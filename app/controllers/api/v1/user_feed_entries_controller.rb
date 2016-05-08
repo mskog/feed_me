@@ -1,16 +1,22 @@
 class Api::V1::UserFeedEntriesController < Api::ApiController
   def index
-    entries = FeedEntryDecorator.decorate_collection(scope.order(id: :desc).page(page).per(20))
+    entries = FeedEntryDecorator.decorate_collection(scope_with_query.order(id: :desc).page(page).per(20))
     render json: entries, each_serializer: FeedEntrySerializer, meta: meta_attributes(entries)
   end
 
   private
 
+  def scope_with_query
+    _scope = scope
+    return _scope unless params.key? :query
+    _scope.where("feed_entries.title ILIKE :query OR feed_entries.summary ILIKE :query", query: "%#{params[:query]}%")
+  end
+
   def scope
     if params[:user_feed_id]
       FeedEntry.joins(feed: :user_feeds).where(user_feeds: {id: params[:user_feed_id]})
     else
-      FeedEntry.joins(feed: :users).where(users: {id: current_user.id}).all
+      FeedEntry.joins(feed: :users).where(users: {id: current_user.id})
     end
   end
 
