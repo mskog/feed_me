@@ -1,11 +1,18 @@
 class Api::V1::UserFeedEntriesController < Api::ApiController
   def index
-    user_feed = UserFeed.includes(feed: :entries).find(params[:user_feed_id])
-    entries = FeedEntryDecorator.decorate_collection(user_feed.feed.entries.order(id: :desc).page(page).per(20))
+    entries = FeedEntryDecorator.decorate_collection(scope.order(id: :desc).page(page).per(20))
     render json: entries, each_serializer: FeedEntrySerializer, meta: meta_attributes(entries)
   end
 
   private
+
+  def scope
+    if params[:user_feed_id]
+      UserFeed.includes(feed: :entries).find(params[:user_feed_id]).feed.entries
+    else
+      FeedEntry.joins(feed: :users).where(users: {id: current_user.id}).all
+    end
+  end
 
   def page
     params[:page] || 1

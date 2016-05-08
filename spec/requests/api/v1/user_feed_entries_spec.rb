@@ -2,10 +2,24 @@ require 'spec_helper'
 
 describe "API:V1:UserFeedEntries", type: :request do
   Given(:user){create :user}
-  Given!(:user_feed){create :user_feed, user: user}
   Given(:parsed_response){JSON.parse response.body}
 
-  context "simple" do
+  context "with no given user feed" do
+    Given(:other_feed){create :feed}
+    Given{create :user_feed, feed: other_feed}
+    Given!(:user_feed){create :user_feed, user: user}
+    Given!(:feed_entry_1){create :feed_entry, feed: user_feed.feed, summary: 'a'*256}
+    Given!(:feed_entry_2){create :feed_entry, feed: other_feed, summary: "<a href='example.com'>foobar</a>"}
+
+    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token)}
+
+    Then{expect(response.status).to eq 200}
+    And{expect(parsed_response['feed_entries'].size).to eq 1}
+    And{expect(parsed_response['feed_entries'].first['title']).to eq feed_entry_1.title}
+  end
+
+  context "with a given user feed" do
+    Given!(:user_feed){create :user_feed, user: user}
     Given!(:feed_entry_1){create :feed_entry, feed: user_feed.feed, summary: 'a'*256}
     Given!(:feed_entry_2){create :feed_entry, feed: user_feed.feed, summary: "<a href='example.com'>foobar</a>"}
 
@@ -30,6 +44,7 @@ describe "API:V1:UserFeedEntries", type: :request do
   end
 
   context "paginated" do
+    Given!(:user_feed){create :user_feed, user: user}
     Given!(:feed_entries){create_list :feed_entry, 30, feed: user_feed.feed}
 
     When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id)}
