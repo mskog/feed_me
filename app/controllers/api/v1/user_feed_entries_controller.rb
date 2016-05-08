@@ -8,7 +8,7 @@ class Api::V1::UserFeedEntriesController < Api::ApiController
 
   def scope
     if params[:user_feed_id]
-      UserFeed.includes(feed: :entries).find(params[:user_feed_id]).feed.entries
+      FeedEntry.joins(feed: :user_feeds).where(user_feeds: {id: params[:user_feed_id]})
     else
       FeedEntry.joins(feed: :users).where(users: {id: current_user.id}).all
     end
