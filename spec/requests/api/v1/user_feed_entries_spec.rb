@@ -9,7 +9,7 @@ describe "API:V1:UserFeedEntries", type: :request do
     Given!(:feed_entry_1){create :feed_entry, feed: user_feed.feed, summary: 'a'*256}
     Given!(:feed_entry_2){create :feed_entry, feed: user_feed.feed, summary: "<a href='example.com'>foobar</a>"}
 
-    When{get api_v1_entries_path(user_feed.id, user_email: user.email, user_token: user.authentication_token)}
+    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id)}
     Given(:first_entry){parsed_response['feed_entries'].first}
     Given(:second_entry){parsed_response['feed_entries'].second}
 
@@ -32,7 +32,7 @@ describe "API:V1:UserFeedEntries", type: :request do
   context "paginated" do
     Given!(:feed_entries){create_list :feed_entry, 30, feed: user_feed.feed}
 
-    When{get api_v1_entries_path(user_feed.id, user_email: user.email, user_token: user.authentication_token)}
+    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id)}
     Then{expect(response.status).to eq 200}
     And{expect(parsed_response['feed_entries'].size).to eq 20}
     And{expect(parsed_response['meta']['current_page']).to eq 1}

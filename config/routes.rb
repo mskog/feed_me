@@ -6,11 +6,8 @@ end
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :feeds, only: [:index, :create, :destroy], controller: :user_feeds do
-        member do
-          resources :entries, only: [:index], controller: :user_feed_entries
-        end
-      end
+      resources :user_feed_entries, only: [:index]
+      resources :feeds, only: [:index, :create, :destroy], controller: :user_feeds
     end
   end
 
