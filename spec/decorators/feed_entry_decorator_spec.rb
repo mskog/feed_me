@@ -17,5 +17,10 @@ describe FeedEntryDecorator do
       Given(:summary){"Im a little teapot"}
       Then{expect(result).to eq summary}
     end
+
+    context "with a summary that is nil" do
+      Given(:summary){nil}
+      Then{expect(result).to eq ''}
+    end
   end
 end
