@@ -35,6 +35,21 @@ describe "API:V1:UserFeeds", type: :request do
       Then{expect(response.status).to eq 200}
       And{expect(expected_feed['title']).to eq 'GameSpot Reviews'}
     end
+
+    context "when a user feed for the given feed already exists" do
+      Given!(:feed){create :feed, url: url}
+      Given!(:user_feed){create :user_feed, user: user, feed: feed}
+
+      Given(:url){'http://example.com/something.rss'}
+      Given(:params){{user_feed: {url: url}}}
+
+      Given(:parsed_response){JSON.parse response.body}
+      Given(:expected_feed){parsed_response['user_feed']}
+
+      Then{expect(response.status).to eq 200}
+      And{expect(UserFeed.count).to eq 1}
+      And{expect(expected_feed['title']).to eq feed.title}
+    end
   end
 
   describe "DELETE destroy" do
