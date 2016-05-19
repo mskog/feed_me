@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "API:V1:UserFeedEntries", type: :request do
+describe "API:V1:FeedEntries", type: :request do
   Given(:user){create :user}
   Given(:parsed_response){JSON.parse response.body}
 
@@ -11,11 +11,11 @@ describe "API:V1:UserFeedEntries", type: :request do
     Given!(:user_feed){create :user_feed, user: user}
     Given!(:feed_entry_1){create :feed_entry, feed: user_feed.feed, summary: 'a'*256}
 
-    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token)}
+    When{get api_v1_feed_entries_path(user_email: user.email, user_token: user.authentication_token)}
 
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['feed_entries'].size).to eq 1}
-    And{expect(parsed_response['feed_entries'].first['title']).to eq feed_entry_1.title}
+    And{expect(parsed_response['data'].size).to eq 1}
+    And{expect(parsed_response['data'].first['attributes']['title']).to eq feed_entry_1.title}
   end
 
   context "with no given user feed and a query matching by title" do
@@ -28,11 +28,11 @@ describe "API:V1:UserFeedEntries", type: :request do
 
     Given(:query){'foo'}
 
-    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, query: query)}
+    When{get api_v1_feed_entries_path(user_email: user.email, user_token: user.authentication_token, query: query)}
 
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['feed_entries'].size).to eq 1}
-    And{expect(parsed_response['feed_entries'].first['title']).to eq feed_entry_1.title}
+    And{expect(parsed_response['data'].size).to eq 1}
+    And{expect(parsed_response['data'].first['attributes']['title']).to eq feed_entry_1.title}
   end
 
   context "with no given user feed and a query matching by summary" do
@@ -45,11 +45,11 @@ describe "API:V1:UserFeedEntries", type: :request do
 
     Given(:query){'foo'}
 
-    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, query: query)}
+    When{get api_v1_feed_entries_path(user_email: user.email, user_token: user.authentication_token, query: query)}
 
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['feed_entries'].size).to eq 1}
-    And{expect(parsed_response['feed_entries'].first['title']).to eq feed_entry_1.title}
+    And{expect(parsed_response['data'].size).to eq 1}
+    And{expect(parsed_response['data'].first['attributes']['title']).to eq feed_entry_1.title}
   end
 
   context "with a given user feed" do
@@ -57,12 +57,12 @@ describe "API:V1:UserFeedEntries", type: :request do
     Given!(:feed_entry_1){create :feed_entry, feed: user_feed.feed, summary: 'a'*256}
     Given!(:feed_entry_2){create :feed_entry, feed: user_feed.feed, summary: "<a href='example.com'>foobar</a>"}
 
-    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id)}
-    Given(:first_entry){parsed_response['feed_entries'].first}
-    Given(:second_entry){parsed_response['feed_entries'].second}
+    When{get api_v1_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id)}
+    Given(:first_entry){parsed_response['data'].first['attributes']}
+    Given(:second_entry){parsed_response['data'].second['attributes']}
 
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['feed_entries'].size).to eq 2}
+    And{expect(parsed_response['data'].size).to eq 2}
 
     And{expect(first_entry['summary']).to eq 'foobar'}
 
@@ -83,10 +83,10 @@ describe "API:V1:UserFeedEntries", type: :request do
 
     Given(:query){'foo'}
 
-    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id, query: query)}
-    Given(:first_entry){parsed_response['feed_entries'].first}
+    When{get api_v1_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id, query: query)}
+    Given(:first_entry){parsed_response['data'].first['attributes']}
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['feed_entries'].size).to eq 1}
+    And{expect(parsed_response['data'].size).to eq 1}
     And{expect(first_entry['title']).to eq 'foobar'}
   end
 
@@ -97,10 +97,10 @@ describe "API:V1:UserFeedEntries", type: :request do
 
     Given(:query){'foo'}
 
-    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id, query: query)}
-    Given(:first_entry){parsed_response['feed_entries'].first}
+    When{get api_v1_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id, query: query)}
+    Given(:first_entry){parsed_response['data'].first['attributes']}
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['feed_entries'].size).to eq 1}
+    And{expect(parsed_response['data'].size).to eq 1}
     And{expect(first_entry['summary']).to eq 'foobar'}
   end
 
@@ -108,9 +108,9 @@ describe "API:V1:UserFeedEntries", type: :request do
     Given!(:user_feed){create :user_feed, user: user}
     Given!(:feed_entries){create_list :feed_entry, 30, feed: user_feed.feed}
 
-    When{get api_v1_user_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id)}
+    When{get api_v1_feed_entries_path(user_email: user.email, user_token: user.authentication_token, user_feed_id: user_feed.id)}
     Then{expect(response.status).to eq 200}
-    And{expect(parsed_response['feed_entries'].size).to eq 20}
+    And{expect(parsed_response['data'].size).to eq 20}
     And{expect(parsed_response['meta']['current_page']).to eq 1}
     And{expect(parsed_response['meta']['next_page']).to eq 2}
     And{expect(parsed_response['meta']['prev_page']).to be_nil}

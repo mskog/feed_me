@@ -1,6 +1,6 @@
 class Api::V1::UserFeedsController < Api::ApiController
   def index
-    render json: UserFeed.all
+    render json: UserFeed.includes(:feed).all
   end
 
   def create

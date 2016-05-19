@@ -10,7 +10,7 @@ describe "API:V1:UserFeeds", type: :request do
 
     When{get api_v1_feeds_path(authenticated_params)}
     Given(:parsed_response){JSON.parse response.body}
-    Given(:first_feed){parsed_response['user_feeds'].first}
+    Given(:first_feed){parsed_response['data'].first['attributes']}
 
     Then{expect(response.status).to eq 200}
     And{expect(first_feed['title']).to eq user_feed.feed.title}
@@ -30,7 +30,7 @@ describe "API:V1:UserFeeds", type: :request do
       Given(:params){{user_feed: {url: url}}}
 
       Given(:parsed_response){JSON.parse response.body}
-      Given(:expected_feed){parsed_response['user_feed']}
+      Given(:expected_feed){parsed_response['data']['attributes']}
 
       Then{expect(response.status).to eq 200}
       And{expect(expected_feed['title']).to eq 'GameSpot Reviews'}
@@ -44,7 +44,7 @@ describe "API:V1:UserFeeds", type: :request do
       Given(:params){{user_feed: {url: url}}}
 
       Given(:parsed_response){JSON.parse response.body}
-      Given(:expected_feed){parsed_response['user_feed']}
+      Given(:expected_feed){parsed_response['data']['attributes']}
 
       Then{expect(response.status).to eq 200}
       And{expect(UserFeed.count).to eq 1}
